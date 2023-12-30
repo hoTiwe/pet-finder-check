@@ -1,10 +1,10 @@
 import { StatusPet } from "src/utils/enums";
 import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { UserEntity } from "./user.entity";
+import { UsersEntity } from "./user.entity";
 
 
-@Entity({name: 'pet'})
-export class PetEntity extends BaseEntity {
+@Entity({name: 'pets'})
+export class PetsEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         type: 'smallint'
     })
@@ -34,8 +34,8 @@ export class PetEntity extends BaseEntity {
     @Column()
     userId: number;
 
-    @ManyToOne(() => UserEntity, (user) => user.pets)
-    user: UserEntity;
+    @ManyToOne(() => UsersEntity, (user) => user.pets)
+    user: UsersEntity;
 
     @Column()
     specieId: number;

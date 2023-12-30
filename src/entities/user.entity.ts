@@ -1,15 +1,12 @@
 import { BaseEntity, Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
-import { PetEntity } from './pets.entity';
+import { PetsEntity } from './pets.entity';
 
-@Entity({ name: 'user' })
-export class UserEntity extends BaseEntity {
+@Entity({ name: 'users' })
+export class UsersEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         type: 'int',
     })
     id: number;
-
-    @Column()
-    login: string;
 
     @Column()
     email: string;
@@ -20,14 +17,14 @@ export class UserEntity extends BaseEntity {
     @Column()
     fullname: string;
 
-    @Column()
+    @Column({default: false})
     admin: boolean;
 
     @Column()
     numberPhone: string;
 
-    @OneToMany(()=> PetEntity, (pet)=>pet.user)
-    pets: PetEntity[];
+    @OneToMany(()=> PetsEntity, (pet)=>pet.user)
+    pets: PetsEntity[];
 }
 
 

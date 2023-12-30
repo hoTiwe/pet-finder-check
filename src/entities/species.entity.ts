@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { BreedEntity } from "./breed.entity";
+import { BreedsEntity } from "./breed.entity";
 
 
 @Entity({name: "species"})
@@ -13,7 +13,7 @@ export class SpeciesEntity extends BaseEntity{
     @Column()
     name: string;
 
-    @OneToMany(()=> BreedEntity, breed => breed.specie)
-    breed: BreedEntity[];
+    @OneToMany(()=> BreedsEntity, breed => breed.specie)
+    breed: BreedsEntity[];
 
 }

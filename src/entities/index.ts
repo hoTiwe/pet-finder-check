@@ -1,20 +1,21 @@
-import { BreedEntity } from "./breed.entity";
-import { PetEntity } from "./pets.entity";
+import { BreedsEntity } from "./breed.entity";
+import { PetsEntity } from "./pets.entity";
 import { SpeciesEntity } from "./species.entity";
-import { UserEntity } from "./user.entity";
+import { UsersEntity } from "./user.entity";
 
 const entities = [
-    UserEntity,
-    PetEntity,
+    UsersEntity,
+    PetsEntity,
     SpeciesEntity,
-    BreedEntity,
+    BreedsEntity,
 ];
 
 export {
-    UserEntity,
-    PetEntity,
+    UsersEntity,
+    PetsEntity,
     SpeciesEntity,
-    BreedEntity,
+    BreedsEntity,
+
 };
 
 export default entities;

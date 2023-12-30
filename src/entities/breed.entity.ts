@@ -2,8 +2,8 @@ import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColu
 import { SpeciesEntity } from "./species.entity";
 
 
-@Entity({ name: 'breed' })
-export class BreedEntity extends BaseEntity {
+@Entity({ name: 'breeds' })
+export class BreedsEntity extends BaseEntity {
     @PrimaryGeneratedColumn({
         type: 'int',
     })
