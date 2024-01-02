@@ -16,6 +16,4 @@ export class SpeciesController {
     ){
         return await this.speciesService.createSpecie(createSpecieDto);
     }
-
-
 }

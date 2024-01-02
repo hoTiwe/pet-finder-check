@@ -9,7 +9,7 @@ import { SpeciesDto } from "./species.dto";
 export class SpeciesService {
   constructor(
     @InjectRepository(SpeciesEntity)
-    private readonly storiesRepository: Repository<SpeciesEntity>,
+    private readonly speciesRepository: Repository<SpeciesEntity>,
   ) {}
 
   async getSpecies(){
@@ -25,7 +25,7 @@ export class SpeciesService {
   }
 
   async createSpecie(createSpecieDto: SpeciesDto){
-    const existSpecie: SpeciesEntity = await this.storiesRepository.findOne({
+    const existSpecie: SpeciesEntity = await this.speciesRepository.findOne({
         where:{
             name: createSpecieDto.name,
         }
@@ -34,11 +34,11 @@ export class SpeciesService {
         console.log('specie exist')
         throw new HttpException('Specie exist', HttpStatus.BAD_REQUEST)
     }
-    const newSpecie: SpeciesEntity = await this.storiesRepository.create({
+    const newSpecie: SpeciesEntity = this.speciesRepository.create({
         ...createSpecieDto,
     })
 
-    return await this.storiesRepository.save(newSpecie);
+    return await this.speciesRepository.save(newSpecie);
 
   }
 

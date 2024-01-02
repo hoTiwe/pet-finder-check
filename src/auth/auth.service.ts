@@ -5,6 +5,7 @@ import { UsersDto } from "src/users/users.dto";
 import { UsersService } from "src/users/users.service";
 import { Repository } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { AuthDto } from "./auth.dto";
 
 @Injectable()
 export class AuthService {
@@ -38,6 +39,24 @@ export class AuthService {
     const newUset = this.usersRepository.create({ ...createUserDto, password: hashPassword });
 
     return await this.usersRepository.save(newUset);
+  }
+
+  async login(createAuthDto: AuthDto){
+    const candidate: UsersEntity = await this.usersRepository.findOne({
+        where: {
+            email: createAuthDto.email,
+        }
+    })
+    if(!candidate){
+        throw new HttpException('Такого пользователя не существует', HttpStatus.BAD_REQUEST);
+    }
+
+    const validPassword = bcrypt.compareSync(createAuthDto.password, candidate.password);
+    if(!validPassword) {
+        throw new HttpException('Неверный пароль', HttpStatus.BAD_REQUEST);
+    }
+    console.log(createAuthDto.email);
+    return await this.usersService.findOneByEmail(createAuthDto.email);
   }
 
 }

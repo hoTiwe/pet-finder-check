@@ -33,7 +33,7 @@ export class UsersService{
     async findOneByEmail(sentEmail: string): Promise<UsersEntity | undefined>{
         const existUser = await this.usersRepository
             .createQueryBuilder('users')
-            .where(`users.email=${sentEmail}`)
+            .where('users.email = :email', { email: sentEmail })
             .select([
                 "users.id",
                 "users.email",
