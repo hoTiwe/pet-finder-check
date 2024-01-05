@@ -36,5 +36,30 @@ export class BreedsService {
     return await this.breedsRepository.save(newBreed);
   }
   
+  async getAllPetsByBreedId(breedId: number){
+    const existPets = await this.breedsRepository
+      .createQueryBuilder('breeds')
+      .leftJoinAndSelect('breeds.pets', 'pets')
+      .where("pets.breedId=:Id", {Id: breedId})
+      .select([
+          "breeds.id",
+          "breeds.name",
+          "pets.id",
+          "pets.name",
+          "pets.description",
+          "pets.gender",
+          "pets.size",
+          "pets.color",
+          "pets.status",
+          "pets.img",
+
+      ])
+      .getOne();
+      console.log("existPets=", existPets)
+      if(!existPets)
+        throw new HttpException("Такой категории не существует", HttpStatus.BAD_REQUEST);
+      return existPets;
+  }
+
 }
 
